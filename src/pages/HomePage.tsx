@@ -70,21 +70,20 @@ function HomePage() {
                 setPageNumber(Math.ceil(resultSearchData.filter((data:IProduct)=> data.price > 1000 && data.discountPercentage > 0).length / amountProducts))
                 return resultSearchData.filter((data:IProduct)=> data.price > 1000 && data.discountPercentage > 0)
             case "Total Price":
-                setPageNumber(Math.ceil(resultSearchData.length/amountProducts))
+                setPageNumber(Math.ceil(resultSearchData.length/ amountProducts))
                 return resultSearchData.map((data) => ({
                     ...data,
                     totalPrice: (data.stock*data.price).toFixed(3)
                 }))
             case "Rating":
-                setPageNumber(Math.ceil(resultSearchData.length/amountProducts))
+                setPageNumber(Math.ceil(resultSearchData.length/ amountProducts))
                 return resultSearchData.map(x => x).sort((a, b)=> b.rating - a.rating).sort((a, b) => a.price - b.price)
             default:
                 setPageNumber(Math.ceil(resultSearchData.length / amountProducts))
                 return resultSearchData
         }
-    },[amountProducts, filterText, resultSearchData])
+    },[filterText, resultSearchData, amountProducts])
 
-    console.table("Limit: " + store.skip)
     return (
         <div className="flex-colum bg-transparent justify-center items-center p-12">
             <div className="flex gap-6 m-7">
@@ -109,7 +108,7 @@ function HomePage() {
                     </select>
                 </form>
             </div>
-            <ProductTable data={resultFilterData} pageNumber={pageNumber} amountProduct={amountProducts} />
+            <ProductTable data={resultFilterData} pageNumber={pageNumber} amountProduct={store.limit} />
         </div>
     )
 }

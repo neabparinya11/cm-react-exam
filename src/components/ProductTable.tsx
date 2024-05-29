@@ -17,7 +17,7 @@ function ProductTable({ data, pageNumber, amountProduct }: IProductTable) {
     }
 
     const pageList = useMemo(() => {
-        return Array(pageNumber).fill(0).map((e, i) => i + 1)
+        return Array(pageNumber).fill(0).map((_, i) => i + 1)
     }, [pageNumber])
 
     const pageStart = useMemo(() => {

@@ -1,14 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { IProduct } from '../pages/HomePage'
 
-const initialState = {
-    products: []
+interface ProductState {
+    products: IProduct[]
+}
+
+const initialState: ProductState = {
+    products: [],
 }
 
 const productSlice = createSlice({
     name: 'product',
     initialState,
     reducers:{
-        AddProduct: (state, action) => {
+        AddProduct: (state, action: PayloadAction<IProduct[]>) => {
             state.products = action.payload
         }
     }

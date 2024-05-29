@@ -8,7 +8,7 @@ interface ILoginForm{
 }
 
 const loginValidate = Yup.object().shape({
-    email: Yup.string().min(1).required().email(), // change to regex
+    email: Yup.string().min(1).required().matches(/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/), // change to regex
     password: Yup.string().min(8).required()
 })
 
