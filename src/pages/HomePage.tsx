@@ -18,7 +18,7 @@ export interface IProduct {
     price: number,
     rating: number,
     stock: number,
-    totalPrice?: string
+    totalPrice?: number
 }
 
 export interface IStoreProduct {
@@ -73,7 +73,7 @@ function HomePage() {
                 setPageNumber(Math.ceil(resultSearchData.length/ amountProducts))
                 return resultSearchData.map((data) => ({
                     ...data,
-                    totalPrice: (data.stock*data.price).toFixed(3)
+                    totalPrice: (data.stock*data.price)
                 }))
             case "Rating":
                 setPageNumber(Math.ceil(resultSearchData.length/ amountProducts))
@@ -82,24 +82,23 @@ function HomePage() {
                 setPageNumber(Math.ceil(resultSearchData.length / amountProducts))
                 return resultSearchData
         }
-    },[filterText, resultSearchData, amountProducts])
+    },[amountProducts, filterText, resultSearchData])
 
     return (
-        <div className="flex-colum bg-transparent justify-center items-center p-12">
-            <div className="flex gap-6 m-7">
+        <div className="flex-column bg-transparent justify-center items-center p-16 bg-white border-b">
+            <div className="flex-column md:flex gap-6 p-7 bg-white border-b">
                 <form action="">
-                    <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Search</label>
+                    <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900">Search</label>
                    <input 
                     type="text" 
                     placeholder="Search name..." 
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" 
                     onChange={(e)=> onSearching(e.currentTarget.value)}    
                 /> 
                 </form>
-                
                 <form action="" className="">
-                    <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
-                    <select onChange={(e)=> setFilterText(e.currentTarget.value)} name="" id="" defaultValue={"Choose a filter"} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900">Select an option</label>
+                    <select onChange={(e)=> setFilterText(e.currentTarget.value)} name="" id="" defaultValue={"Choose a filter"} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         <option value="Choose a filter">Choose a filter</option>
                         <option value="All">All</option>
                         <option value="Price more than 1000">Price more than 1000</option>
